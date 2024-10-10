@@ -59,4 +59,20 @@ public abstract class TransactionReportGenerator {
         }
     }
 
+    public static void generateCategoryExpenseReport(List<Transaction> transactions) {
+        Map<String, Double> categoryExpenses = transactions.stream()
+                .filter(t -> t.getAmount() < 0)
+                .collect(Collectors.groupingBy(
+                        Transaction::getDescription,
+                        Collectors.summingDouble(Transaction::getAmount)
+                ));
+
+        System.out.println("Звіт по категоріях:");
+        for (Map.Entry<String, Double> entry : categoryExpenses.entrySet()) {
+            String category = entry.getKey();
+            double totalExpense = Math.abs(entry.getValue());
+            System.out.println(category + ": " + totalExpense + " грн");
+        }
+    }
+
 }

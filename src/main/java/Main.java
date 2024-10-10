@@ -26,6 +26,7 @@ public class Main {
         TransactionReportGenerator.printMaxAndMinExpensesReport(maxExpense, minExpense);
 
         TransactionReportGenerator.generateMonthlyExpenseReport(transactions);
+        TransactionReportGenerator.generateCategoryExpenseReport(transactions);
 
     }
 }
